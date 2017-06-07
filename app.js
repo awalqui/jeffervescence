@@ -1,4 +1,6 @@
 const app = {
+    name: [],
+
   init(selectors) {
     this.max = 0
     this.list = document.querySelector(selectors.listSelector)
@@ -19,6 +21,12 @@ const app = {
     this.list.appendChild(listItem)
 
     ++ this.max
+    f.reset()
+    this.save()
+  },
+
+  save() {
+      localStorage.setItem('flick-form', this.save)
   },
 
   renderListItem(flick) {
