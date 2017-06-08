@@ -1,3 +1,7 @@
+.template {
+    visibility: hidden;
+}
+
 .container {
     max-width: 940px
 }
