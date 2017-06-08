@@ -21,6 +21,7 @@
               name="flickName"
               placeholder="Name a flick"
               autofocus
+              required
             >
             <div class="input-group-button">
               <button 
@@ -38,23 +39,15 @@
     <div class="row">
       <div class="medium-8 medium-offset-2 column">
         <ul class="no-bullet" id="flick-list">
-        <li class="flick template">
+          <li class="flick template">
             <span class="flick-name"></span>
             <span class="actions">
-                <button class="fav"></button>
-        </span>
-        </li>
+              <button class="fav button">Fav</button>
+              <button class="remove button alert">Remove</button>
+            </span>
+          </li>
         </ul>
-      </div>            
-    </div>
-
-    <div class="medium-8 medium-offset-2 column">
-        <button 
-            class="favorite button"
-            type="submit"
-        >
-            Fav
-        </button>
+      </div>
     </div>
 
     <script src="app.js"></script>
