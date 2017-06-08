@@ -7,7 +7,7 @@
 ### Super Mega Bonus Credit
 
 * Add a promote/fav button, just like you did yesterday!
-* Add a delete butto just like yesterday!
+* Add a delete button just like yesterday!
 
 ### Super Mega Bonus Credit Hyper Fighting
 

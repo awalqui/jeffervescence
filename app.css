@@ -1,0 +1,11 @@
+.container {
+    max-width: 940px
+}
+
+h1 {
+    font-family: Calibri;
+    text-transform: uppercase;
+    text-align: center;
+    background-color: lightseagreen;
+    padding: 0;
+}
