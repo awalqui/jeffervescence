@@ -59,15 +59,6 @@ const app = {
       element.cName = element.cName.replace(cName, '').trim()
   },
 
-  goUp(flick, ev) {
-      const g = ev.target.closest('.flick')
-
-      const locat = this.flicks.findIndex((current, i) => {
-          return current.id === flick.id
-      })
-
-  },
-
   renderListItem(flick) {
     const item = this.template.cloneNode(true)
     item.classList.remove('template')
@@ -86,55 +77,79 @@ const app = {
     item
         .querySelector('button.fav')
         .addEventListener('click', this.favFlick.bind(this, flick))
-    
+    item
+        .querySelector('button.move-up')
+        .addEventListener('click', this.moveUp.bind(this, flick))
+    item 
+        .querySelector('button.move-down')
+        .addEventListener('click', this.moveDown.bind(this, flick))
+
     return item
   },
 
   removeFlick(ev) {
-    const g = ev.target.closest('.flick')
+    const listItem = ev.target.closest('.flick')
 
     for (let i = 0; i < this.flicks.length; i++) {
         const currentId = this.flicks[i].id.toString()
-        if (g.dataset.id === currentId) {
+        if (listItem.dataset.id === currentId) {
             this.flicks.splice(i, 1)
             break
         }
     }
 
-    g.remove()
+    listItem.remove()
     this.save() 
   },
 
   favFlick(flick, ev) {
-      const g = ev.target.closest('.flick')
+      const listItem = ev.target.closest('.flick')
       flick.fav = !flick.fav
 
       if (flick.fav) {
-        g.classList.add('fav')
+        listItem.classList.add('fav')
       } else {
-        g.classList.remove('fav')
+        listItem.classList.remove('fav')
       }
         
       this.save()
   },
 
-  moveUp (flick, ev) {
-      const listItem = ev.target.closest('flick')
+  moveUp(flick, ev) {
+    const listItem = ev.target.closest('.flick')
+
+    const index = this.flicks.findIndex((currentFlick, i) => {
+      return currentFlick.id === flick.id
+    })
+
+    if (index > 0) {
+      this.list.insertBefore(listItem, listItem.previousElementSibling)
+
+      const previousFlick = this.flicks[index - 1]
+      this.flicks[index - 1] = flick
+      this.flicks[index] = previousFlick
+      this.save()
+    }
+  },
+
+  moveDown(flick, ev) {
+      const listItem = ev.target.closest('.flick')
 
       const index = this.flicks.findIndex((currentFlick, i) => {
-        currentFlick.id === flick.id
+          return currentFlick.id === flick.id
       })
 
-      if (index > 0) {
-          this.list.insertBefore(listItem, listItem.previousElementSibling)
+      if (index < this.flicks.length -1) {
+          this.list.insertBefore(listItem.nextElementSibling, listItem)
 
-          const previousFlick = this.flicks[index - 1]
-          this.flicks[index -1] = flick
-          this.flicks[index] = prerviousFlick
+          const nextFlick = this.flicks[index +1]
+          this.flicks[index + 1] = flick
+          this.flicks[index] = nextFlick
           this.save()
       }
-  }
+  },
 }
+
 
 app.init({
   formSelector: '#flick-form',
