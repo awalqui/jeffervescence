@@ -1,6 +1,5 @@
-const app = {
-
-  init(selectors) {
+class App {
+  constructor(selectors) {
     this.max = 0,
     this.flicks = [],
     this.list = document.querySelector(selectors.listSelector)
@@ -10,7 +9,7 @@ const app = {
       .addEventListener('submit', this.addFlickViaForm.bind(this))
 
     this.load()
-  },
+  }
 
   load() {
       // Get the JSON string out of localStorage
@@ -25,7 +24,7 @@ const app = {
             .reverse()
             .map(this.addFlick.bind(this))
       }
-  },
+  }
 
   addFlick(flick) {
       const listItem = this.renderListItem(flick)
@@ -35,7 +34,7 @@ const app = {
       ++ this.max
       this.flicks.unshift(flick)
       this.save()
-  },
+  }
 
   addFlickViaForm(ev) {
     ev.preventDefault()
@@ -49,15 +48,15 @@ const app = {
     this.addFlick(flick)
 
     f.reset()
-  },
+  }
   
   save() {
       localStorage.setItem('flicks', JSON.stringify(this.flicks))
-  },
+  }
 
   removeClass(element, cName) {
       element.cName = element.cName.replace(cName, '').trim()
-  },
+  }
 
   renderListItem(flick) {
     const item = this.template.cloneNode(true)
@@ -92,7 +91,7 @@ const app = {
         .addEventListener('click', this.edit.bind(this, flick))
 
     return item
-  },
+  }
 
   removeFlick(ev) {
     const listItem = ev.target.closest('.flick')
@@ -107,7 +106,7 @@ const app = {
 
     listItem.remove()
     this.save() 
-  },
+  }
 
   favFlick(flick, ev) {
       const listItem = ev.target.closest('.flick')
@@ -120,7 +119,7 @@ const app = {
       }
         
       this.save()
-  },
+  }
 
   moveUp(flick, ev) {
     const listItem = ev.target.closest('.flick')
@@ -137,7 +136,7 @@ const app = {
       this.flicks[index] = previousFlick
       this.save()
     }
-  },
+  }
 
   moveDown(flick, ev) {
       const listItem = ev.target.closest('.flick')
@@ -154,7 +153,7 @@ const app = {
           this.flicks[index] = nextFlick
           this.save()
       }
-  },
+  }
 
   edit(flick, ev) {
     const listItem = ev.target.closest('.flick')
@@ -180,7 +179,7 @@ const app = {
       icon.classList.add('fa-check')
       btn.classList.add('success')
     }
-  },
+  }
 
   saveOnEnter(flick, ev) {
     if (ev.key === 'Enter') {
@@ -189,9 +188,8 @@ const app = {
   }
 }
 
-
-app.init({
+const app = new App({
   formSelector: '#flick-form',
   listSelector: '#flick-list',
-  templateSelector: '.flick.template'
+  templateSelector: '.flick.template',
 })
