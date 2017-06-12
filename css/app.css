@@ -1,0 +1,60 @@
+.template {
+    visibility: hidden;
+}
+
+.container {
+    max-width: 940px
+}
+
+h1 {
+    font-family: Calibri;
+    text-transform: uppercase;
+    text-align: center;
+    -webkit-text-fill-color: lightslategray;
+    background-color: darkblue;
+    padding: 0;
+}
+
+html {
+    background: url(https://ak9.picdn.net/shutterstock/videos/14193476/thumb/1.jpg) no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.flick.template {
+
+}
+
+.flick {
+    border: 1px solid lightgray;
+    clear: both;
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1.25rem;
+    transition: 0.25s
+}
+
+.flick + .flick {
+  border-top: 0;
+}
+
+.flick-name {
+    flex-grow: 1;
+}
+
+.actions.button.group {
+    margin-bottom: 0;
+}
+
+.flick.fav {
+  background-color: #ffa807;
+  border-color: #ffc656;
+}
+
+.flick:first-child button.move-up {
+    background-color: #ddd;
+    color: #eee;
+    cursor: not-allowed;
+}

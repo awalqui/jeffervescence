@@ -43,6 +43,7 @@ const app = {
     const flick = {
       id: this.max + 1,
       name: f.flickName.value,
+      fav: false,
     }
 
     this.addFlick(flick)
@@ -57,7 +58,16 @@ const app = {
   removeClass(element, cName) {
       element.cName = element.cName.replace(cName, '').trim()
   },
-  
+
+  goUp(flick, ev) {
+      const g = ev.target.closest('.flick')
+
+      const locat = this.flicks.findIndex((current, i) => {
+          return current.id === flick.id
+      })
+
+  },
+
   renderListItem(flick) {
     const item = this.template.cloneNode(true)
     item.classList.remove('template')
@@ -65,11 +75,18 @@ const app = {
     item
         .querySelector('.flick-name')
         .textContent = flick.name
+        
+    if (flick.fav) {
+        item.classList.add('fav')
+    }
 
     item
         .querySelector('button.remove')
         .addEventListener('click', this.removeFlick.bind(this))
-
+    item
+        .querySelector('button.fav')
+        .addEventListener('click', this.favFlick.bind(this, flick))
+    
     return item
   },
 
@@ -87,6 +104,36 @@ const app = {
     g.remove()
     this.save() 
   },
+
+  favFlick(flick, ev) {
+      const g = ev.target.closest('.flick')
+      flick.fav = !flick.fav
+
+      if (flick.fav) {
+        g.classList.add('fav')
+      } else {
+        g.classList.remove('fav')
+      }
+        
+      this.save()
+  },
+
+  moveUp (flick, ev) {
+      const listItem = ev.target.closest('flick')
+
+      const index = this.flicks.findIndex((currentFlick, i) => {
+        currentFlick.id === flick.id
+      })
+
+      if (index > 0) {
+          this.list.insertBefore(listItem, listItem.previousElementSibling)
+
+          const previousFlick = this.flicks[index - 1]
+          this.flicks[index -1] = flick
+          this.flicks[index] = prerviousFlick
+          this.save()
+      }
+  }
 }
 
 app.init({
