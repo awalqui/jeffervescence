@@ -38,6 +38,14 @@ class App {
       this.save()
   }
 
+/*  addYear(flick) {
+      const listItem = this.renderListItem(flick)
+      this.list
+        .insertBefore(listItem, this.list.firstChild)
+    
+      this.save()
+  }*/
+
   addFlickViaForm(ev) {
     ev.preventDefault()
     const f = ev.target
@@ -70,6 +78,12 @@ class App {
     item 
         .querySelector('.flick-name')
         .setAttribute('title', flick.name)
+/*    item 
+        .querySelector('.flick-year')
+        .textContent = flick.year
+    item
+        .querySelector('.flick-year')
+        .setAttribute('title', flick.name)*/
         
     if (flick.fav) {
         item.classList.add('fav')
